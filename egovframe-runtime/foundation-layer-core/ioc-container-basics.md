@@ -6,7 +6,7 @@
 
 ## 설명
 
- Spring Framework에서 Bean은 어플리케이션을 구성하고, IoC Container에 의해 관리되어지는 객체로 간단히 말해 IoC Container에 의해 객체화되고, 조립되고, 또는 관리되는 객체를 의미한다.  
+ Spring Framework에서 Bean은 어플리케이션을 구성하고, IoC Container에 의해 관리되어지는 객체로 간단히 말해 IoC Container에 의해 객체화되고, 조립되고, 또는 관리되는 객체를 의미한다.
 Bean들과 Bean들간의 종속성은 Container가 사용하는 설정 메타데이터에 의해 결정된다.
 
 ### The Container
@@ -17,9 +17,9 @@ Bean들과 Bean들간의 종속성은 Container가 사용하는 설정 메타데
 
 #### 설정 정보(Configuration Metadata)
 
- 위 그림에서 보듯이, Spring IoC Container는 설정 정보(configuration metadata)를 필요로 한다. 이 설정 정보는 Spring IoC Container가 “객체를 생성하고, 객체간의 종속성을 이어줄 수 있도록” 필요한 정보를 제공한다.  
-설정 정보는 일반적으로 XML 형태로 작성된다. 설정 정보는 XML 형태가 아닌 Java Annotation을 이용하여 설정이 가능하다.  
-Annotation을 사용한 설정 방법은 [Annotation-based configuration](https://www.egovframe.go.kr//wiki/doku.php?id=egovframework:rte:fdl:ioc_container:annotation-based_configuration)에서 설명하고 있다.  
+ 위 그림에서 보듯이, Spring IoC Container는 설정 정보(configuration metadata)를 필요로 한다. 이 설정 정보는 Spring IoC Container가 “객체를 생성하고, 객체간의 종속성을 이어줄 수 있도록” 필요한 정보를 제공한다.
+설정 정보는 일반적으로 XML 형태로 작성된다. 설정 정보는 XML 형태가 아닌 Java Annotation을 이용하여 설정이 가능하다.
+Annotation을 사용한 설정 방법은 [Annotation-based configuration](https://www.egovframe.go.kr//wiki/doku.php?id=egovframework:rte:fdl:ioc_container:annotation-based_configuration)에서 설명하고 있다.
 
  아래 예제는 XML 형태의 설정 정보의 기본적인 모습이다.
 
@@ -42,7 +42,7 @@ Annotation을 사용한 설정 방법은 [Annotation-based configuration](https:
 </beans>
 ```
 
- &lt;beans&gt; tag는 Spring IoC Container의 설정 정보를 나타내는 tag이다. 그리고 각각의 &lt;bean&gt; tag는 Spring IoC Container가 생성하고, 관리할 객체의 정의를 나타낸다.  
+ &lt;beans&gt; tag는 Spring IoC Container의 설정 정보를 나타내는 tag이다. 그리고 각각의 &lt;bean&gt; tag는 Spring IoC Container가 생성하고, 관리할 객체의 정의를 나타낸다.
 XML 설정 정보를 여러 개의 파일로 나뉘어 구성될 수 있다. 이 경우, 전체 설정 정보를 읽기 위해서 하나의 설정 파일에서 다른 파일을 import할 수 있다. Import 하는 방법으로 &lt;import&gt; tag를 사용한다.
 
  ```xml
@@ -64,7 +64,7 @@ XML 설정 정보를 여러 개의 파일로 나뉘어 구성될 수 있다. 이
 
  ```java
 ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"services.xml", "daos.xml"});
- 
+
 // an Application is also a BeanFactory (via inheritance)
 BeanFactory factory = context;
 ```
@@ -80,13 +80,13 @@ BeanFactory factory = context;
  Spring IoC Container는 다수의 ***bean***들을 관리한다. Container는 설정 정보를 사용하여 bean들은 생성한다. Container에서 사용하는 bean 정의는 아래 정보를 담고 있다.
 
 *   클래스 이름(a package-qualified class name): bean의 실제 구현 클래스를 나타낸다.
-    
+
 *   Bean 행동 정보(bean behavioral configuration elements): Container 안에서 bean이 어떤 식으로 행동하는지에 대한 정보를 나타낸다.(scope, lifecycle callbacks 등등)
-    
+
 *   다른 bean에 대한 참조(references to other beans): bean이 동작하기 위해 필요한 다른 bean들에 대한 참조 정보를 나타낸다. 이런 참조는 협력자(collaborators) 또는 종속성(dependencies)라고도 한다.
-    
+
 *   기타 객체에 설정할 정보들(other configuration settings): connection pool을 관리하는 bean에서 사용할 connection의 개수, 또는 pool의 최대 크기 등
-    
+
 
  위 개념적인 정보들은 실제 &lt;bean&gt; tag로 작성된다. &lt;bean&gt; tag를 구성하는 bean 정의는 아래 표와 같다.
 
@@ -105,7 +105,7 @@ BeanFactory factory = context;
 
 #### Bean 이름(Naming beans)
 
- 모든 bean은 하나 이상의 id를 가져야 하며, 각각의 id는 Container안에서 단 하나만 존재해야 한다. 일반적으로 대부분의 bean은 하나의 id를 가지지만, 별명(alias)를 사용하여 둘 이상의 id를 가질 수도 있다.  
+ 모든 bean은 하나 이상의 id를 가져야 하며, 각각의 id는 Container안에서 단 하나만 존재해야 한다. 일반적으로 대부분의 bean은 하나의 id를 가지지만, 별명(alias)를 사용하여 둘 이상의 id를 가질 수도 있다.
 Bean id에 대한 명명 규칙은 Java의 class field 명명 규칙과 같다. id는 소문자로 시작하고, 두번째 단어부터는 첫글자는 대문자로 작성한다. 'accountManager', 'accountService', 'userDao', 'loginController' 등
 
 ##### Bean 별명(Aliasing beans)
@@ -120,9 +120,9 @@ Bean id에 대한 명명 규칙은 Java의 class field 명명 규칙과 같다. 
 
 #### Bean 객체화(Instantiation beans)
 
- 모든 bean 정의는 객체화를 위해 실제 Java Class가 필요하다.  
-XML 설정에서는 'class' attribute를 통해 Java Class를 설정한다. 대부분의 경우 Container는 bean를 객체화하기 위해서 Java의 ***'new'*** 연산자를 사용한다.  
-또는 특수한 경우, static 메소드를 사용할 수도 있다. 본 문서는 생성자를 이용한 객체화만을 설명한다.  
+ 모든 bean 정의는 객체화를 위해 실제 Java Class가 필요하다.
+XML 설정에서는 'class' attribute를 통해 Java Class를 설정한다. 대부분의 경우 Container는 bean를 객체화하기 위해서 Java의 ***'new'*** 연산자를 사용한다.
+또는 특수한 경우, static 메소드를 사용할 수도 있다. 본 문서는 생성자를 이용한 객체화만을 설명한다.
 생성자를 이용한 객체화는 가장 일반적인 방식으로, 다음과 같이 사용한다.
 
  ```xml
@@ -133,4 +133,4 @@ XML 설정에서는 'class' attribute를 통해 Java Class를 설정한다. 대�
 
 ## 참고자료
 
-*   [Spring Framework - Reference Document / 1.1 Introduction to the Spring IoC Container and Beans](https://www.egovframe.go.kr/https://docs.spring.io/spring-framework/docs/5.3.27/reference/html/core.html#beans-introduction)
+*   [Spring Framework - Reference Document / 1.1 Introduction to the Spring IoC Container and Beans](https://docs.spring.io/spring-framework/docs/5.3.27/reference/html/core.html#beans-introduction)
